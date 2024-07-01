@@ -1,0 +1,3 @@
+FROM alpine:3.19.2
+
+EXPOSE 443
