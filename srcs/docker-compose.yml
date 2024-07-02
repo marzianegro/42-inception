@@ -1,0 +1,23 @@
+services:
+  # mariadb:
+
+  nginx:
+    build:
+      context: requirements/nginx
+      dockerfile: nginx.Dockerfile
+    ports:
+    - 443:443 # host port 443 binds to container port 443
+    volumes:
+    - nginx-certs:/etc/ssl/private
+    - ./requirements/nginx/nginx.conf:/etc/nginx/nginx.conf # substitutes existing .conf
+
+  # wordpress:
+
+volumes:
+  nginx-certs:
+    driver: local
+    driver_opts:
+      device: ./requirements/nginx/certs
+      o: bind
+      # used with `o: bind` to indicate that the mount is a bind and not a volume mount
+      type: none
