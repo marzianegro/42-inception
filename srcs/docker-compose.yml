@@ -1,23 +1,47 @@
+##########
 services:
-  # mariadb:
-
   nginx:
     build:
       context: requirements/nginx
       dockerfile: nginx.Dockerfile
     ports:
-    - 443:443 # host port 443 binds to container port 443
+      - 443:443 # host port 443 binds to container port 443
     volumes:
-    - ./requirements/nginx/certs:/etc/ssl/private
-    - ./requirements/nginx/nginx.conf:/etc/nginx/nginx.conf # substitutes existing .conf
+      - ./requirements/nginx/certs:/etc/ssl/private
+      - ./requirements/nginx/nginx.conf:/etc/nginx/nginx.conf # substitutes existing .conf
+    restart: on-failure # the policy restarts the container if the exit code indicates an error
 
   wordpress:
     build:
       context: requirements/wordpress
       dockerfile: wordpress.Dockerfile
     volumes:
-    - ./requirements/wordpress/data:/var/www/html
+      - ./requirements/wordpress/data:/var/www/html
+    restart: on-failure
 
+  mariadb:
+    build:
+      context: requirements/mariadb
+      dockerfile: mariadb.Dockerfile
+    environment:
+      - MARIADB_ROOT_PASSWORD=supersecret-root-pw
+      - MARIADB_DATABASE=DB
+      - MARIADB_USER=mnegro
+      - MARIADB_PASSWORD=supersecret-pw
+    volumes:
+      - mariadb_data:/var/lib/mysql # persist database data
+    restart: on-failure
+
+##########
+volumes:
+    wordpress_data:
+    mariadb_data: # database setup more resilient and manageable
+
+##########
+networks:
+
+
+##########
 # volumes:
 #   nginx_certs:
 #     driver: local
@@ -32,3 +56,4 @@ services:
 #       device: ./requirements/wordpress/data
 #       o: bind
 #       type: none
+##########

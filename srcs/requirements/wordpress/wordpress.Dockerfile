@@ -1,4 +1,4 @@
-FROM php:fpm
+FROM wordpress:php7.4-fpm
 
 RUN apt-get update && apt-get install -y \
 	# these two are needed to download and extract WordPress
