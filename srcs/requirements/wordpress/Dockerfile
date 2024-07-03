@@ -2,35 +2,35 @@ FROM alpine:3.19.2
 
 # install necessary packages without saving cache
 RUN apk add --no-cache \
-	php8 \
-	php8-fpm
+	php82 \
+	php82-fpm
 
 # required for a WordPress site to work
 RUN apk add --no-cache \
-	php8-json \
-	php8-mysqli \
+	php82-json \
+	php82-mysqli \
 	# essential for character type checking and data validation
-	php8-ctype \
+	php82-ctype \
 	# critical for managing user sessions and logins
-	php8-session
+	php82-session
 
 # highly recommended in order to allow WordPress to operate optimally
 RUN apk add --no-cache \
-	php8-curl \
-	php8-dom \
-	php8-intl \
-	php8-mbstring \
-	php8-openssl \
-	php8-xml \
+	php82-curl \
+	php82-dom \
+	php82-intl \
+	php82-mbstring \
+	php82-openssl \
+	php82-xml \
 	# essential for image processing tasks within WordPress
-	php8-gd 
+	php82-gd 
 
 # may be used in certain situations or if other modules are unavailable
 RUN apk add --no-cache \
-	php8-xmlreader \
-	php8-zlib \
+	php82-xmlreader \
+	php82-zlib \
 	# used for handling PHP archives, depending on plugins or tools
-	php8-phar
+	php82-phar
 
 # needed to download and extract WordPress
 RUN apk add --no-cache \
@@ -39,14 +39,20 @@ RUN apk add --no-cache \
 
 # downloading and extracting WordPress
 RUN wget https://wordpress.org/latest.zip \
-&& unzip latest.zip -d /var/www/html/ \
-&& rm latest.zip # removing the zip file to clean up
+	&& mkdir -p /var/www/html/ \
+	&& unzip latest.zip -d /var/www/html/ \
+	# removing the zip file to clean up
+	&& rm latest.zip
 
-# changing ownership
-RUN chown -R www-data:www-data /var/www/html/wordpress
+# create user and changing ownership
+RUN adduser -S www-data -G www-data \
+	&& chown -R www-data:www-data /var/www/html/
+
+# xopy custom PHP-FPM config file
+COPY conf/www.conf /etc/php82/php-fpm.d/www.conf
 
 # this doesn't actually publish the port to the host; it's more like
 # a documentation feature unless used with `docker run -p`
 EXPOSE 9000
 
-CMD [ "php8-fpm" ]
+CMD [ "php-fpm82", "-F" ]
