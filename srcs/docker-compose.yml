@@ -7,9 +7,10 @@ services:
     ports:
       - 443:443 # host port 443 binds to container port 443
     volumes:
-      - ./requirements/nginx/conf/certs:/etc/ssl/private
+      - ./requirements/nginx/conf/mnegro.42.fr.pem:/etc/ssl/certs/mnegro.42.fr.pem
+      - ./requirements/nginx/conf/mnegro.42.fr.key:/etc/ssl/private/mnegro.42.fr.key
       # - ./requirements/nginx/conf/nginx.conf:/etc/nginx/nginx.conf # substitutes existing .conf
-      - ./requirements/nginx/conf/wordpress.conf:/etc/nginx/http.d/wordpress.conf
+      - ./requirements/nginx/conf/server.conf:/etc/nginx/http.d/server.conf
       - wp_data:/var/www/html/wordpress
     restart: on-failure # the policy restarts the container if the exit code indicates an error
     networks:
@@ -31,8 +32,8 @@ services:
   #     dockerfile: Dockerfile
   #   environment:
   #     - MARIADB_ROOT_PASSWORD=supersecret-root-pw
-  #     - MARIADB_DATABASE=DB
-  #     - MARIADB_USER=mnegro
+  #     - MARIADB_DATABASE=wordpress_db
+  #     - MARIADB_USER=wordpress_user
   #     - MARIADB_PASSWORD=supersecret-pw
   #   volumes:
   #     - db_data:/var/lib/mysql # persist database data
