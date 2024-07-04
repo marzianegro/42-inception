@@ -19,7 +19,7 @@ ciao bepz, siccome potresti essere confuso, questo è quello che sto facendo da 
 > CREATE DATABASE test_db CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 
 > CREATE USER 'test_user'@'%' IDENTIFIED BY 'test_pw';
-> GRANT ALL PRIVILEGES ONtest_db.* TO 'your_wp_user'@'%';
+> GRANT ALL PRIVILEGES ON test_db.* TO 'test_user'@'%';
 > FLUSH PRIVILEGES;
 
 ////////// STEP 4 (in srcs/wordpress/conf/wp-config.php)

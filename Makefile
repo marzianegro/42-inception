@@ -6,12 +6,12 @@
 #    By: mnegro <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/02 21:51:42 by mnegro            #+#    #+#              #
-#    Updated: 2024/07/03 22:13:06 by mnegro           ###   ########.fr        #
+#    Updated: 2024/07/04 21:31:47 by mnegro           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 ### PHONY TARGET ###
-.PHONY: up down
+.PHONY: up down fdown cache
 
 ### SILENT TARGET ###
 .SILENT:
@@ -23,12 +23,19 @@ NAME = inception
 
 ### (EXPLICIT) RULES ###
 up:
-	docker compose -f srcs/docker-compose.yml up --build 
+	docker compose -f srcs/docker-compose.yml up --build
 	@echo "\n${GREEN}docker compose up${DEF_COLOR} executed successfully!"
 
 down:
 	docker compose -f srcs/docker-compose.yml down
 	@echo "\n${GREEN}docker compose down${DEF_COLOR} executed successfully!"
+
+fdown:
+	docker compose -f srcs/docker-compose.yml down -v
+	@echo "\n${GREEN}docker compose down -v${DEF_COLOR} executed successfully!"
+
+cache:
+	docker builder prune -f
 
 ### (BRIGHT) COLORS ###
 DEF_COLOR = \033[0;39m

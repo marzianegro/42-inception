@@ -26,20 +26,22 @@ services:
     networks:
       - app-network
 
-  # mariadb:
-  #   build:
-  #     context: requirements/mariadb
-  #     dockerfile: Dockerfile
-  #   environment:
-  #     - MARIADB_ROOT_PASSWORD=supersecret-root-pw
-  #     - MARIADB_DATABASE=wordpress_db
-  #     - MARIADB_USER=wordpress_user
-  #     - MARIADB_PASSWORD=supersecret-pw
-  #   volumes:
-  #     - db_data:/var/lib/mysql # persist database data
-  #   restart: on-failure
-  #   networks:
-  #     - app-network
+  mariadb:
+    build:
+      context: requirements/mariadb
+      dockerfile: Dockerfile
+    environment:
+      - MYSQL_ROOT_PW=supersecret-root-pw
+      - WP_DATABASE_NAME=wordpress_db
+      - WP_DATABASE_USR=wordpress_user
+      - WP_DATABASE_PW=supersecret-pw
+    volumes:
+      - db_data:/var/lib/mysql # persist database data
+    restart: on-failure
+    networks:
+      - app-network
+    ports:
+      - 3306:3306
 
 ##########
 volumes:
