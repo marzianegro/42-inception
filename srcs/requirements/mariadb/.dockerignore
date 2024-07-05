@@ -1,0 +1,24 @@
+# version control directories
+.git/
+
+# build artifacts/
+# dependency caches
+
+# docker files
+*Dockerfile*
+*docker-compose*
+
+# sensitive files
+.env
+*.pem
+*.key
+
+# development tools and configuration
+.vscode/
+
+# unnecessary files
+LICENSE
+*.md
+
+# operating system files
+.DS_Store
