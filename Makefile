@@ -6,12 +6,12 @@
 #    By: mnegro <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/02 21:51:42 by mnegro            #+#    #+#              #
-#    Updated: 2024/07/04 21:31:47 by mnegro           ###   ########.fr        #
+#    Updated: 2024/07/05 16:33:42 by mnegro           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 ### PHONY TARGET ###
-.PHONY: up down fdown cache
+.PHONY: re cache fdown down up
 
 ### SILENT TARGET ###
 .SILENT:
@@ -36,6 +36,13 @@ fdown:
 
 cache:
 	docker builder prune -f
+
+re:
+	docker compose -f srcs/docker-compose.yml down -v
+	docker builder prune -f
+	docker compose -f srcs/docker-compose.yml up --build
+	@echo "\n${GREEN}re${DEF_COLOR} executed successfully!"
+	
 
 ### (BRIGHT) COLORS ###
 DEF_COLOR = \033[0;39m
