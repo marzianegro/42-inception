@@ -1,20 +1,20 @@
 <?php
 
-# Website's base configuration details
-
+# basic WordPress settings
 define('WP_HOME', 'https://mnegro.42.fr');
 define('WP_SITEURL', 'https://mnegro.42.fr');
 
-define('DB_NAME', 'test_db');
-define('DB_USER', 'test_user');
-define('DB_PASSWORD', 'test_pw');
-define('DB_HOST', 'mariadb_test:3306');
+# database settings
+define('DB_NAME', 'gurghi_db');
+define('DB_USER', 'gurghi_usr');
+define('DB_PASSWORD', 'gurghi_pw');
+define('DB_HOST', 'mariadb:3306');
 define('DB_CHARSET', 'utf8mb4');
 define('DB_COLLATE', '');
 
-// define('DB_NAME', 'your_wp_db');
-// define('DB_USER', 'your_wp_user');
-// define('DB_PASSWORD', 'your_password');
-// define('DB_HOST', 'mariadb_test:3306');
-// define('DB_CHARSET', 'utf8mb4');
-// define('DB_COLLATE', '');
+# enable WP_DEBUG mode for debugging during development
+# IMPORTANT: disable this in production.
+define('WP_DEBUG', false);
+
+# automatic updates for minor WordPress versions
+define('WP_AUTO_UPDATE_CORE', 'minor');

@@ -1,5 +1,7 @@
 FROM alpine:3.19.2
 
+RUN apk update && apk upgrade --no-cache
+
 # install necessary packages without saving cache
 RUN apk add --no-cache \
 	php82 \
@@ -44,11 +46,11 @@ RUN wget https://wordpress.org/latest.zip \
 	# removing the zip file to clean up
 	&& rm latest.zip
 
-# create user and changing ownership
+# create user and change ownership
 RUN adduser -S www-data -G www-data \
 	&& chown -R www-data:www-data /var/www/html/
 
-# xopy custom PHP-FPM config file
+# copy custom PHP-FPM config file
 COPY conf/www.conf /etc/php82/php-fpm.d/www.conf
 
 # this doesn't actually publish the port to the host; it's more like
