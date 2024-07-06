@@ -36,7 +36,7 @@ inception/
 │
 ├──Makefile
 └──srcs/
- 	├── docker-compose.yml
+    ├── docker-compose.yml
     ├──.env
     └── requirements/
         ├── mariadb/
