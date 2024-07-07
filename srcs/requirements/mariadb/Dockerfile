@@ -6,7 +6,7 @@ RUN apk update && apk add --no-cache \
 
 EXPOSE 3306
 
-COPY tools/docker-entrypoint.sh /usr/local/bin/
-RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+COPY tools/mariadb-boot.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/mariadb-boot.sh
 
-ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
+ENTRYPOINT ["/usr/local/bin/mariadb-boot.sh"]
