@@ -33,12 +33,14 @@ RUN wget https://wordpress.org/latest.zip -O /tmp/latest.zip \
 	&& unzip /tmp/latest.zip -d /var/www/html/ \
 	&& rm /tmp/latest.zip
 
+RUN adduser -S www-data -G www-data \
+    && chown -R www-data:www-data /var/www/html/
+
 COPY conf/www.conf /etc/php82/php-fpm.d/www.conf
 COPY conf/wp-config.php /var/www/html/wordpress/wp-config.php
 
 EXPOSE 9000
 
-COPY tools/wp-boot.sh /usr/local/bin/wp-boot.sh
+COPY tools/wp-boot.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/wp-boot.sh
-
-ENTRYPOINT [ "/usr/local/bin/wp-boot.sh" ]
+ENTRYPOINT [ "wp-boot.sh" ]
