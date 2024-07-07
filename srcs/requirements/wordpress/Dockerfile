@@ -41,6 +41,8 @@ COPY conf/wp-config.php /var/www/html/wordpress/wp-config.php
 
 EXPOSE 9000
 
-COPY tools/wp-boot.sh /usr/local/bin/
-RUN chmod +x /usr/local/bin/wp-boot.sh
-ENTRYPOINT [ "wp-boot.sh" ]
+# COPY tools/wp-boot.sh /usr/local/bin/
+# RUN chmod +x /usr/local/bin/wp-boot.sh
+# ENTRYPOINT [ "/usr/local/bin/wp-boot.sh" ]
+
+CMD [ "php-fpm82", "-F"]

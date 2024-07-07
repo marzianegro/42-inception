@@ -9,4 +9,4 @@ EXPOSE 3306
 COPY tools/mariadb-boot.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/mariadb-boot.sh
 
-ENTRYPOINT ["mariadb-boot.sh"]
+ENTRYPOINT ["/usr/local/bin/mariadb-boot.sh"]
