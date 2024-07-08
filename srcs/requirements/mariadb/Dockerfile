@@ -6,7 +6,7 @@ RUN apk update && apk add --no-cache \
 
 EXPOSE 3306
 
-COPY tools/mariadb-boot.sh /usr/local/bin/
-RUN chmod +x /usr/local/bin/mariadb-boot.sh
+COPY tools/mariadb-entrypoint.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/mariadb-entrypoint.sh
 
-ENTRYPOINT ["/usr/local/bin/mariadb-boot.sh"]
+ENTRYPOINT ["/usr/local/bin/mariadb-entrypoint.sh"]

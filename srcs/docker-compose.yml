@@ -14,7 +14,8 @@ services:
       - ./requirements/nginx/conf/mnegro.42.fr.pem:/etc/ssl/certs/mnegro.42.fr.pem
       - ./requirements/nginx/conf/mnegro.42.fr.key:/etc/ssl/private/mnegro.42.fr.key
       - ./requirements/nginx/conf/server.conf:/etc/nginx/http.d/server.conf
-      - wp_data:/var/www/html/wordpress
+      # - /home/mnegro/data/wp_data:/var/www/html/wordpress
+      -  /Users/marzianegro/Desktop/wp_data:/var/www/html/wordpress
     depends_on:
       - wordpress
     restart: on-failure
@@ -28,7 +29,8 @@ services:
     env_file:
       - .env
     volumes:
-      - wp_data:/var/www/html/wordpress
+    # - /home/mnegro/data/wp_data:/var/www/html/wordpress
+      -  /Users/marzianegro/Desktop/wp_data:/var/www/html/wordpress
     depends_on:
       - mariadb
     restart: on-failure
@@ -42,15 +44,14 @@ services:
     env_file:
       - .env
     volumes:
-      - db_data:/var/lib/mysql
+    # - /home/mnegro/data/db_data:/var/lib/mysql
+      -  /Users/marzianegro/Desktop/db_data:/var/lib/mysql
     restart: on-failure
 
 ##########
 
 volumes:
-    # - /home/mnegro/data/db_data:
-    db_data:
-    # - /home/mnegro/data/wp_data:
+    db_data:    
     wp_data:
 
 ##########
