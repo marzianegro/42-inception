@@ -3,7 +3,7 @@ Setting up VM for the Inception project.
 
 ## Table of Contents
 - [Installing packages](#Installing-packages)
-- [Installing Docker](#Installing-Docker-on-Ubuntu-using-the-`apt`-repository)
+- [Installing Docker](#Installing-Docker-on-Ubuntu)
 
 # Installing packages
 ```bash
@@ -11,7 +11,7 @@ sudo apt install vim
 sudo apt install make
 ```
 
-# Installing Docker on Ubuntu using the `apt` repository
+# Installing Docker on Ubuntu
 Before you install Docker Engine for the first time on a new host machine, you need to set up the Docker repository.
 Afterward, you can install and update Docker from the repository.
 
