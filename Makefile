@@ -6,7 +6,7 @@
 #    By: mnegro <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/02 21:51:42 by mnegro            #+#    #+#              #
-#    Updated: 2024/07/10 00:07:20 by mnegro           ###   ########.fr        #
+#    Updated: 2024/07/10 00:55:44 by mnegro           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,8 +44,10 @@ clean:
 	@echo "\n${YELLOW}Cleaning volumes...${DEF_COLOR}"
 	docker compose -f ${DIR} down -v
 	docker builder prune -af
-	rm -rf /home/mnegro/data/wp_data/*
-	rm -rf /home/mnegro/data/db_data/*
+	rm -rf /Users/marzianegro/Desktop/data/wp_data/*
+	rm -rf /Users/marzianegro/Desktop/data/db_data/*
+# rm -rf /home/mnegro/data/wp_data/*
+# rm -rf /home/mnegro/data/db_data/*
 	@echo "\n${GREEN}docker volume prune${DEF_COLOR} complete!"
 
 fclean: clean
@@ -59,11 +61,11 @@ re: clean all
 
 eval-prep:
 	@echo "${YELLOW}Prepping for evaluation...${DEF_COLOR}"
-	docker stop $(docker ps -qa); \
-	docker rm $(docker ps -qa); \
-	docker rmi -f $(docker images -qa); \
-	docker volume rm $(docker volume ls -q); \
-	docker network rm $(docker network ls -q) 2>/dev/null
+	docker stop $$(docker ps -qa); \
+	docker rm $$(docker ps -qa); \
+	docker rmi -f $$(docker images -qa); \
+	docker volume rm $$(docker volume ls -q); \
+	docker network rm $$(docker network ls -q) 2>/dev/null
 	@echo "\n${GREEN}eval-prep${DEF_COLOR} complete!"
 
 	

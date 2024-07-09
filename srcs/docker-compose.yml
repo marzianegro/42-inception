@@ -18,6 +18,8 @@ services:
     depends_on:
       - wordpress
     restart: on-failure
+    networks:
+      - gurghi_net
 
   wordpress:
     container_name: gurghi_wordpress
@@ -32,6 +34,8 @@ services:
     depends_on:
       - mariadb
     restart: on-failure
+    networks:
+      - gurghi_net
 
   mariadb:
     container_name: gurghi_mariadb
@@ -44,6 +48,8 @@ services:
     volumes:
     - db_data:/var/lib/mysql
     restart: on-failure
+    networks:
+      - gurghi_net
 
 ##########
 
@@ -52,19 +58,22 @@ volumes:
     name: db_data
     driver: local
     driver_opts:
-      device: /home/mnegro/data/db_data
+      # device: /home/mnegro/data/db_data
+      device: /Users/marzianegro/Desktop/data/db_data
       o: bind
       type: none
   wp_data:
     name: wp_data
     driver: local
     driver_opts:
-      device: /home/mnegro/data/wp_data
+      # device: /home/mnegro/data/wp_data
+      device: /Users/marzianegro/Desktop/data/wp_data
       o: bind
       type: none
 
 ##########
 
 networks:
-  default:
-    name: gurghi_net
+  # default:
+  #   name: gurghi_net
+  gurghi_net:
