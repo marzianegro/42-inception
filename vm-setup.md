@@ -4,7 +4,7 @@ Setting up VM for the Inception project.
 ## Table of Contents
 - [Installing packages](#Installing-packages)
 - [Installing Docker](#Installing-Docker-on-Ubuntu)
-- [Enabling login.42.fr](#Enabling-your-login.42.fr)
+- [Enabling login.42.fr](#Enabling-your-*login.42.fr*)
 
 # Installing packages
 ```bash
