@@ -4,6 +4,7 @@ Setting up VM for the Inception project.
 ## Table of Contents
 - [Installing packages](#Installing-packages)
 - [Installing Docker](#Installing-Docker-on-Ubuntu)
+- [Enabling login.42.fr](#Enabling-your-login.42.fr)
 
 # Installing packages
 ```bash
@@ -68,3 +69,10 @@ You can also run the following command to activate the changes to groups:
 newgrp docker
 ```
 Verify that you can run docker commands without `sudo`.
+
+# Enabling your *login.42.fr*
+```bash
+sudo vim /etc/hosts
+```
+
+Then add your *login.42.fr* next to `localhost`
