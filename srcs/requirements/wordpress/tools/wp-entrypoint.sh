@@ -34,7 +34,7 @@ fi
 
 # Install WordPress
 echo "Installing WordPress..."
-wp core install --url="https://${DOMAIN_NAME}" --title="${WP_TITLE}" --admin_user="${WP_OWNER_USER}" --admin_password="${WP_OWNER_PASSWORD}" --admin_email="${MYSQL_EMAIL}"
+wp core install --url="https://${DOMAIN_NAME}" --title="${WP_TITLE}" --admin_user="${MYSQL_USER}" --admin_password="${MYSQL_PASSWORD}" --admin_email="${MYSQL_EMAIL}"
 
 # Create a non-admin user
 echo "Creating a non-admin user..."
