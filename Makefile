@@ -6,7 +6,7 @@
 #    By: mnegro <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/02 21:51:42 by mnegro            #+#    #+#              #
-#    Updated: 2024/07/09 15:06:43 by mnegro           ###   ########.fr        #
+#    Updated: 2024/07/09 16:22:32 by mnegro           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,31 +19,41 @@
 ### VARIABLES (DEFINITION) ###
 NAME = inception
 
+DIR = ./srcs/docker-compose.yml
+
 #### TARGETS ####
 
 ### (EXPLICIT) RULES ###
+all: build up
+
+build:
+	@echo "\n${YELLOW}Building images...${DEF_COLOR}"
+	docker compose -f ${DIR} build
+	@echo "\n${GREEN}build${DEF_COLOR} complete!"
+
 up:
-	docker compose -f srcs/docker-compose.yml up --build
-	@echo "\n${GREEN}docker compose up${DEF_COLOR} executed successfully!"
+	@echo "\n${YELLOW}Composing up...${DEF_COLOR}"
+	@docker compose -f ${DIR} up
 
 down:
-	docker compose -f srcs/docker-compose.yml down
-	@echo "\n${GREEN}docker compose down${DEF_COLOR} executed successfully!"
+	@echo "\n${YELLOW}Composing down...${DEF_COLOR}"
+	docker compose -f ${DIR} down
+	@echo "\n${GREEN}docker compose down${DEF_COLOR} complete!"
 
-fdown:
-	docker compose -f srcs/docker-compose.yml down -v
-	@echo "\n${GREEN}docker compose down -v${DEF_COLOR} executed successfully!"
+clean:
+	@echo "\n${YELLOW}Cleaning configs...${DEF_COLOR}"
+	docker system prune -a
+	@echo "\n${GREEN}docker system prune -a${DEF_COLOR} complete!"
 
-cache:
-	docker builder prune -f
-
-re:
-	docker compose -f srcs/docker-compose.yml down -v
-	docker builder prune -f
-	docker compose -fm srcs/docker-compose.yml up --build
-	@echo "\n${GREEN}re${DEF_COLOR} executed successfully!"
+fclean:
+	@echo "\n${YELLOW}Total clean...${DEF_COLOR}"
 	
+	@echo "\n${GREEN}${DEF_COLOR} complete!"
 
+re: clean all
+	@echo "${YELLOW}Rebuilding...${DEF_COLOR}"
+	@echo "\n${GREEN}re${DEF_COLOR} complete!"
+	
 ### (BRIGHT) COLORS ###
 DEF_COLOR = \033[0;39m
 BLACK = \033[1;90m

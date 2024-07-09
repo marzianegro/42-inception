@@ -49,12 +49,14 @@ services:
 
 volumes:
   db_data:
+    name: db_data
     driver: local
     driver_opts:
       device: /home/mnegro/data/db_data
       o: bind
       type: none
   wp_data:
+    name: wp_data
     driver: local
     driver_opts:
       device: /home/mnegro/data/wp_data
