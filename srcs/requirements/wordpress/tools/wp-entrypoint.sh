@@ -23,14 +23,14 @@ echo "Downloading WordPress..."
 wp core download --locale=en_US --force
 
 # Check if wp-config.php already exists and overwrite it if it does
-echo "Checking if wp-config.php already exists..."
-if [ -f "wp-config.php" ]; then
-	echo "wp-config.php exists. Overwriting..."
-	wp config create --dbname="${MYSQL_DATABASE}" --dbuser="${MYSQL_USER}" --dbpass="${MYSQL_PASSWORD}" --dbhost="${MYSQL_HOST}" --skip-check --force
-else
+# echo "Checking if wp-config.php already exists..."
+# if [ -f "wp-config.php" ]; then
+# 	echo "wp-config.php exists. Overwriting..."
+# 	wp config create --dbname="${MYSQL_DATABASE}" --dbuser="${MYSQL_USER}" --dbpass="${MYSQL_PASSWORD}" --dbhost="${MYSQL_HOST}" --skip-check --force
+# else
 	echo "Creating wp-config.php..."
 	wp config create --dbname="${MYSQL_DATABASE}" --dbuser="${MYSQL_USER}" --dbpass="${MYSQL_PASSWORD}" --dbhost="${MYSQL_HOST}" --skip-check
-fi
+# fi
 
 # Install WordPress
 echo "Installing WordPress..."
