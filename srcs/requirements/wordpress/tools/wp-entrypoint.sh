@@ -28,11 +28,11 @@ wp config create --dbname="${MYSQL_DATABASE}" --dbuser="${MYSQL_USER}" --dbpass=
 
 # Install WordPress
 echo "Installing WordPress..."
-wp core install --url="https://mnegro.42.fr" --title="gurghiception" --admin_user="gurghi" --admin_password="mela" --admin_email="gurghi@e.mail"
+wp core install --url="https://${DOMAIN_NAME}" --title="${WP_TITLE}" --admin_user="${WP_OWNER_USER}" --admin_password="${WP_OWNER_PASSWORD}" --admin_email="${MYSQL_EMAIL}"
 
 # Create a non-admin user
 echo "Creating a non-admin user..."
-wp user create taron taron@e.mail --role=author --user_pass=tbc
+wp user create "${WP_OWNER_USER}" "${WP_OWNER_EMAIL}" --role=author --user_pass="${WP_OWNER_PASSWORD}"
 
 echo "WordPress installation completed."
 

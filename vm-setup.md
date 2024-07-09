@@ -8,6 +8,7 @@ Setting up VM for the Inception project.
 
 # Installing packages
 ```bash
+sudo apt install git
 sudo apt install vim
 sudo apt install make
 ```
