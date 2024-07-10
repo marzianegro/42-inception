@@ -1,4 +1,0 @@
-https://www.hostinger.com/tutorials/how-to-install-wordpress-with-nginx-on-ubuntu/#6_Install_WordPress_with_Nginx
-https://www.tutorialworks.com/container-networking/
-https://developer.wordpress.org/advanced-administration/server/web-server/nginx/
-https://wiki.alpinelinux.org/wiki/MariaDB#

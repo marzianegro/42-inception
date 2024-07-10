@@ -17,8 +17,6 @@
 .vscode/
 
 # unnecessary files
-LICENSE
-*.md
 
 # operating system files
 .DS_Store

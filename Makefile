@@ -6,12 +6,12 @@
 #    By: mnegro <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/02 21:51:42 by mnegro            #+#    #+#              #
-#    Updated: 2024/07/10 10:53:09 by mnegro           ###   ########.fr        #
+#    Updated: 2024/07/10 13:46:18 by mnegro           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 ### PHONY TARGET ###
-.PHONY: eval-prep re fclean clean down up build all
+.PHONY: re fclean clean down up build all rm-certs certs
 
 ### SILENT TARGET ###
 .SILENT:
@@ -24,15 +24,22 @@ DIR = ./srcs/docker-compose.yml
 #### TARGETS ####
 
 ### (EXPLICIT) RULES ###
-all: build up
-
 certs:
 	@echo "\n${YELLOW}Generating certificates...${DEF_COLOR}"
 	@{ cd srcs/requirements/nginx/conf; \
 		if [ ! -f mnegro.42.fr.key ] || [ ! -f mnegro.42.fr.pem ]; then \
 			openssl req -newkey rsa:2048 -nodes -keyout mnegro.42.fr.key -x509 -days 365 -out mnegro.42.fr.pem \
 			-subj "/C=IT/ST=Tuscany/L=Florence/O=42/OU=CS/CN=mnegro/emailAddress=@student.42firenze.it"; \
+		else \
+			echo "${RED}Certificates already exist!${DEF_COLOR}"; \
 		fi; }
+
+rm-certs:
+	@{ cd srcs/requirements/nginx/conf; \
+		rm mnegro.42.fr.*; \
+		echo "${GREEN}Certificates have been deleted!${DEF_COLOR}"; }
+
+all: build up
 
 build:
 	@echo "\n${YELLOW}Building images...${DEF_COLOR}"
@@ -64,16 +71,6 @@ fclean: clean
 re: clean all
 	@echo "${YELLOW}Rebuilding...${DEF_COLOR}"
 	@echo "\n${GREEN}re${DEF_COLOR} complete!"
-
-eval-prep:
-	@echo "${YELLOW}Prepping for evaluation...${DEF_COLOR}"
-	docker stop $$(docker ps -qa); \
-	docker rm $$(docker ps -qa); \
-	docker rmi -f $$(docker images -qa); \
-	docker volume rm $$(docker volume ls -q); \
-	docker network rm $$(docker network ls -q) 2>/dev/null
-	@echo "\n${GREEN}eval-prep${DEF_COLOR} complete!"
-
 	
 ### (BRIGHT) COLORS ###
 DEF_COLOR = \033[0;39m
