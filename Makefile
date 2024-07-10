@@ -6,7 +6,7 @@
 #    By: mnegro <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/02 21:51:42 by mnegro            #+#    #+#              #
-#    Updated: 2024/07/10 00:55:44 by mnegro           ###   ########.fr        #
+#    Updated: 2024/07/10 10:53:09 by mnegro           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,14 @@ DIR = ./srcs/docker-compose.yml
 ### (EXPLICIT) RULES ###
 all: build up
 
+certs:
+	@echo "\n${YELLOW}Generating certificates...${DEF_COLOR}"
+	@{ cd srcs/requirements/nginx/conf; \
+		if [ ! -f mnegro.42.fr.key ] || [ ! -f mnegro.42.fr.pem ]; then \
+			openssl req -newkey rsa:2048 -nodes -keyout mnegro.42.fr.key -x509 -days 365 -out mnegro.42.fr.pem \
+			-subj "/C=IT/ST=Tuscany/L=Florence/O=42/OU=CS/CN=mnegro/emailAddress=@student.42firenze.it"; \
+		fi; }
+
 build:
 	@echo "\n${YELLOW}Building images...${DEF_COLOR}"
 	docker compose -f ${DIR} build
@@ -44,10 +52,8 @@ clean:
 	@echo "\n${YELLOW}Cleaning volumes...${DEF_COLOR}"
 	docker compose -f ${DIR} down -v
 	docker builder prune -af
-	rm -rf /Users/marzianegro/Desktop/data/wp_data/*
-	rm -rf /Users/marzianegro/Desktop/data/db_data/*
-# rm -rf /home/mnegro/data/wp_data/*
-# rm -rf /home/mnegro/data/db_data/*
+	sudo rm -rf /home/mnegro/data/wp_data/*
+	sudo rm -rf /home/mnegro/data/db_data/*
 	@echo "\n${GREEN}docker volume prune${DEF_COLOR} complete!"
 
 fclean: clean

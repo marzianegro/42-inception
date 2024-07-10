@@ -1,6 +1,6 @@
 #!/bin/sh
 
-sleep 4
+sleep 5
 
 # Variables
 WP_DIR="/var/www/html/wordpress"
